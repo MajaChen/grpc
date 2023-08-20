@@ -2,7 +2,6 @@ package org.example;
 
 import io.grpc.ManagedChannel;
 import io.grpc.ManagedChannelBuilder;
-import proto.common.Commands;
 import proto.common.KeyStringValuePair;
 import proto.common.ReportData;
 import proto.common.ReportServiceGrpc;
@@ -14,6 +13,7 @@ public class ReportClient {
     ReportServiceGrpc.ReportServiceBlockingStub reportServiceStub = ReportServiceGrpc.newBlockingStub(channel);
     reportServiceStub.uploadReport(mockReportData());
     System.out.printf("报告已上传");
+    channel.shutdown();
   }
   
   public static ReportData mockReportData() {
