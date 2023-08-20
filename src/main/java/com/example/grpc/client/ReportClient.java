@@ -1,18 +1,18 @@
-package org.example;
+package com.example.grpc.client;
 
+import com.proto.common.KeyStringValuePair;
+import com.proto.report.ReportData;
+import com.proto.report.ReportServiceGrpc;
+import com.proto.report.ReportType;
 import io.grpc.ManagedChannel;
 import io.grpc.ManagedChannelBuilder;
-import proto.common.KeyStringValuePair;
-import proto.common.ReportData;
-import proto.common.ReportServiceGrpc;
-import proto.common.ReportType;
 
 public class ReportClient {
   public static void main(String[] args) {
     ManagedChannel channel = ManagedChannelBuilder.forAddress("localhost", 9089).usePlaintext().build();
     ReportServiceGrpc.ReportServiceBlockingStub reportServiceStub = ReportServiceGrpc.newBlockingStub(channel);
     reportServiceStub.uploadReport(mockReportData());
-    System.out.printf("报告已上传");
+    System.out.println("报告已上传");
     channel.shutdown();
   }
   
